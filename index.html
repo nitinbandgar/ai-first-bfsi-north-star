@@ -568,7 +568,7 @@ table.idx td.hu{font-size:.8rem}
 
 <footer class="footer wrap">
   <p><strong>How to use this page.</strong> Walk the lifecycle rail left to right and ask one question at each stage: <em>would we be comfortable defending this autonomy level to a regulator, a customer, and our own audit committee?</em> Where the answer is no, the fix is usually a control, not a retreat from automation.</p>
-  <p>An independent, illustrative concept model of a generic diversified Indian lender. Not affiliated with, endorsed by, or describing any specific company, and not investment, legal or compliance advice. Regulatory references are indicative and stated as at the time of writing; validate all of them against current source texts with qualified counsel before implementation.</p>
+  <p>An independent, illustrative concept model of a generic diversified Indian lender. Not affiliated with, endorsed by, or describing any specific company, and not investment, legal or compliance advice. Regulatory references were checked against public sources in <strong>August 2026</strong> and each carries its issuing authority, date and status; two are not binding law &mdash; the FREE-AI report is recommendatory, and the Model Risk Management guidance was a draft under consultation. Regulation changes. Validate everything against current source texts with qualified counsel before implementation.</p>
 </footer>
 
 <script>
@@ -715,7 +715,7 @@ const STAGES = [
   {s:'Non-negotiable', t:'<b>A generative model never makes the credit decision.</b> LLM agents gather, structure, explain and draft. A validated, versioned, deterministic policy and scorecard engine decides. This single boundary is what makes everything else in this architecture defensible to a regulator.'},
   {s:'Explainability', t:'Every decision reproduces on demand: same inputs, same model version, same outcome, same reason codes. <b>Declines carry a documented right to human review.</b>'},
   {s:'Fair lending', t:'Continuous testing for disparate impact through proxy attributes. Prohibited attributes are excluded by design and <b>proxy leakage is measured, not assumed away.</b>'},
-  {s:'Model risk', t:'Model inventory, documented lineage, champion–challenger, pre-deployment validation, drift thresholds and a tested rollback path — consistent with RBI’s IT governance expectations and the direction of the FREE-AI framework.'},
+  {s:'Model risk', t:'Model inventory, documented lineage, champion–challenger, pre-deployment validation, drift thresholds and a tested rollback path. RBI’s <b>draft Model Risk Management guidance of June 2026</b> would make much of this mandatory for NBFCs of all layers — including a board-approved framework, an inventory without which no model may be deployed, and independent validation by the entity itself even for third-party models.'},
   {s:'Fraud classification', t:'Principles of natural justice apply: the borrower is heard before any adverse fraud classification. <b>An agent may flag; only a constituted committee may classify.</b>'}]
 },
 {
@@ -861,7 +861,7 @@ const STAGES = [
   {r:'Operations Head', a:'Accountable for the statutory release clock. This is a penalty-bearing legal obligation, not an internal service level.'},
   {r:'Legal', a:'Handles disputed liens, lost documents and title complications, where the answer is judgment rather than process.'}],
  guards:[
-  {s:'Document release', t:'Original movable and immovable property documents must be released <b>within 30 days of full repayment</b>, with per-day compensation payable for delay. Exposure is tracked daily and reported at board level.'},
+  {s:'Document release', t:'Original movable and immovable property documents must be released <b>within 30 days of full repayment</b>, with <b>₹5,000 per day</b> compensation payable for delay. Lost or damaged documents get a further 30 days and must be replaced at the lender’s cost. Exposure is tracked daily and reported at board level.'},
   {s:'DPDP erasure', t:'On closure and expiry of the retention period, personal data is deleted or de-identified <b>across every system and every agent memory store</b> — including embeddings and caches.'},
   {s:'Honest exit', t:'No retention obstruction at closure. A closure request is executed, not negotiated. The advocacy agent may only re-engage after closure completes.'}]
 }];
@@ -1081,8 +1081,8 @@ const SCENARIOS = [
 /* ---------- REGULATION MAPPER ---------- */
 const REGS = [
 {
- id:'dl', t:'Digital Lending Directions', s:'Reserve Bank of India',
- what:'Governs lending conducted over digital channels: a Key Facts Statement with all-inclusive annual percentage rate before execution, a cooling-off period, disclosure of lending service providers, restrictions on automatic credit limit increases, and direct flow of funds between lender and borrower.',
+ id:'dl', t:'Digital Lending Directions, 2025', s:'RBI · notified May 2025 · consolidates prior instructions',
+ what:'A single consolidated code for lending over digital channels: a <b>digitally signed Key Facts Statement</b> setting out the all-in cost including annual percentage rate, tenor, repayment schedule and penalties, served before the contract is executed; a <b>cooling-off period of at least one day, and three days for tenors above a week</b>, during which the borrower may exit paying only proportionate interest and a disclosed processing fee; impartial display of offers by lending service providers; restrictions on automatic credit limit increases; and direct flow of funds between lender and borrower.',
  risk:'Getting this wrong is not a fine — it is a business restriction. Digital lending conduct is examined closely, and an agentic front end multiplies the volume of every disclosure error.',
  ctrl:['KFS generation is a dedicated agent with a single job, and it runs before any agreement can be presented — enforced by sequence, not by training',
   'The pricing grid is the only source of a rate; a price outside it cannot be generated, so it cannot be mis-disclosed',
@@ -1141,8 +1141,8 @@ const REGS = [
  ag:['Vendor Due Diligence Agent','Concentration Risk Agent','Contract Compliance Agent','Incident & Rollback Agent']
 },
 {
- id:'cert', t:'CERT-In Cyber Security Directions', s:'CERT-In / MeitY',
- what:'Reporting of specified cyber incidents within six hours of noticing, synchronisation of system clocks to Indian reference time, and retention of ICT logs for 180 days within India.',
+ id:'cert', t:'CERT-In Cyber Security Directions', s:'CERT-In · issued 28 April 2022 under s.70B(6), IT Act 2000',
+ what:'Reporting of specified cyber incidents <b>within six hours of noticing</b>, synchronisation of system clocks to Indian reference time, and retention of ICT logs <b>for 180 days, stored within India</b> and produced to CERT-In on request. Non-compliance carries penal consequences under section 70B.',
  risk:'A six-hour clock leaves no room for an incident to be discovered slowly. It also assumes you can tell what an agent did — which requires per-agent identity and logging designed in advance.',
  ctrl:['Every agent holds its own identity and least-privilege credentials — never a shared service account, which is what usually ends an investigation',
   'Full action logging per agent, retained in-country, sufficient to reconstruct any incident',
@@ -1171,8 +1171,8 @@ const REGS = [
  ag:['Grievance Agent','Conduct Analytics Agent','AI Governance Agent','Omnichannel Service Agent']
 },
 {
- id:'docs', t:'Release of property documents on closure', s:'Reserve Bank of India',
- what:'Original movable and immovable property documents must be released within 30 days of full repayment or settlement, with compensation payable to the borrower for each day of delay beyond the timeline.',
+ id:'docs', t:'Release of property documents on closure', s:'RBI · circular September 2023, effective 1 December 2023',
+ what:'Original movable and immovable property documents must be released within <b>30 days</b> of full repayment or settlement, with compensation of <b>₹5,000 for each day of delay</b> beyond that. Where documents are lost or damaged, the entity must assist the borrower in obtaining duplicates or certified copies <b>at its own cost</b>, with a further 30 days allowed — so the penalty clock starts after 60 days in that case, not 30.',
  risk:'A per-day financial penalty attached to a process most lenders run on spreadsheets and courier receipts. It is the clearest, most measurable quick win in the entire lifecycle.',
  ctrl:['The release clock starts automatically at closure, from the system of record — never from someone noticing',
   'Document custody is tracked physically and digitally with escalation well before the statutory window closes',
@@ -1181,14 +1181,25 @@ const REGS = [
  ag:['Closure Orchestration Agent','Document Release Agent','NOC & Lien Release Agent','Bureau Update Agent']
 },
 {
- id:'freeai', t:'Responsible AI in the financial sector', s:'Reserve Bank of India — FREE-AI framework direction',
- what:'The regulator’s framework for responsible and ethical enablement of AI sets expectations around governance, fairness, transparency, explainability, accountability, human oversight, incident reporting and consumer protection for AI used in financial services.',
- risk:'The supervisory direction of travel is clear: AI will be examined as a governed capability, not tolerated as a technology experiment. Firms that built governance last will spend years retrofitting under pressure.',
+ id:'freeai', t:'FREE-AI Committee Report', s:'RBI · released 13 August 2025 · recommendatory, not binding',
+ what:'The report of the RBI’s Committee on a Framework for Responsible and Ethical Enablement of Artificial Intelligence, chaired by Dr. Pushpak Bhattacharyya and constituted in December 2024. It sets out <b>seven guiding principles or “sutras”</b> — Trust, People First, Innovation, Fairness, Accountability, Explainability and Resilience — together with <b>26 recommendations</b> spanning governance, consumer protection, model risk and capacity building.',
+ risk:'Read its status precisely: this is a <b>committee report, not a binding direction</b>. It signals supervisory intent rather than creating obligations. The mistake in either direction is costly — treating it as law invents constraints, and dismissing it as advisory misses that its recommendations are now surfacing in actual draft regulation.',
  ctrl:['A board-approved AI policy defining permitted autonomy by decision type, reviewed annually',
   'An AI Council with Risk, Compliance, Legal, Technology and Business approving every autonomy change',
   'Explainability, fairness testing and human oversight designed per workflow rather than declared per company',
   'Proactive supervisory engagement — the regulator should hear about your autonomy model from you, before an inspection'],
  ag:['AI Governance Agent','Model Risk Agent','Evaluation Harness Agent','Regulatory Change Agent']
+},
+{
+ id:'mrm', t:'Draft Guidance on Model Risk Management, 2026', s:'RBI · issued 24 June 2026 · draft, comments closed 24 July 2026',
+ what:'The most consequential document on this page. It extends model risk governance from credit models to <b>every model an entity uses</b> — internal, third-party and AI/ML alike, and expressly “irrespective of whether the RE recognises them as models”. It applies across eleven categories of regulated entity, <b>including NBFCs of all layers</b>. Requirements include a board-approved Model Risk Management Framework, a mandatory model inventory, independent validation performed by the entity itself even for third-party models, and three lines of defence with Internal Audit as the third.',
+ risk:'Two provisions decide whether an agentic architecture is viable. First: <b>“No model may be used, relied upon, or deployed unless it is part of the inventory.”</b> An unregistered agent is not an oversight — it is a breach. Second: <b>“An RE acquiring, using, or relying upon third-party models remains fully accountable for its outcomes.”</b> Buying a model does not outsource the consequences. Note the status carefully: this is a <b>draft</b>, the consultation window has closed, and the final text may differ.',
+ ctrl:['The agent registry is not documentation — under a mandatory inventory rule it is the compliance artefact itself, and the draft would require decommissioned models to be retained for ten years',
+  'Validation intensity is tiered by <b>materiality, complexity and autonomy</b> — which is precisely what the autonomy ladder on this page encodes, with an anti-dilution rule preventing a low complexity score from downgrading a high-materiality model',
+  'The draft mandates AI-specific controls this design already assumes: <b>kill-switch arrangements, human-in-the-loop oversight, disclosure to customers that they are interacting with an AI, and the ability to switch to human support</b>',
+  'Seven AI risk dimensions must be addressed explicitly: explainability, hallucinations, bias, overfitting, spurious correlations, output variability and data risks',
+  'Validation reports must reach the Board’s Risk Management Committee within three months, and high-risk models require its approval'],
+ ag:['Agent Registry Agent','Model Risk Agent','AI Governance Agent','Independent validation (human)','Vendor Due Diligence Agent']
 },
 {
  id:'distrib', t:'Distribution licensing boundaries', s:'SEBI · IRDAI',
@@ -1580,6 +1591,7 @@ $('#v-trust').innerHTML = `
     <span class="eyebrow">The practicality test</span>
     <h2>Every obligation, mapped to the control that satisfies it</h2>
     <p>This is the section to open when someone says “the regulator will never allow it”. Select an obligation to see what it actually requires, what genuinely goes wrong, and the specific controls and agents that address it. Nothing here asks for a regulatory exemption — the design works within the rules as they stand.</p>
+    <p style="margin-top:10px;font-size:.9rem"><strong>Verified August 2026.</strong> Each entry carries its issuing authority, date and status. Note which are binding and which are not: the FREE-AI report is <em>recommendatory</em>, and the Model Risk Management guidance was still a <em>draft</em> at the time of writing, its consultation window having closed on 24 July 2026. Confirm all of it against current source texts before acting.</p>
   </div>
   <div class="regwrap">
     <div class="reglist" id="regList">

@@ -19,7 +19,7 @@ discussions: *"the regulator will never allow it."*
 | **Customer Lifecycle** | Nine stages: demand sensing, sell, underwrite, onboard & KYC, serve, grow, collect, retain, exit |
 | **Enterprise Functions** | Finance, Treasury & Investments, Risk & Compliance, Internal Audit, HR, Technology, Cyber, Legal, Procurement, Data & AI Platform |
 | **Walkthrough** | Three step-through scenarios with a live audit ledger |
-| **Trust & Controls** | Twelve regulatory obligations mapped to the controls and agents that satisfy them |
+| **Trust & Controls** | Thirteen regulatory obligations mapped to the controls and agents that satisfy them |
 | **Agent Index** | Searchable register of all 126 agents, each with an autonomy level and a named human owner |
 | **Roadmap** | Three horizons with pass/fail gates, an org-shape view, and eight named failure modes |
 
@@ -58,9 +58,19 @@ represents no organisation's plans or commitments.
 
 All metrics shown are **directional benchmarks for discussion, not measured results.**
 
-Regulatory references — covering RBI digital lending, KYC and V-CIP, fair practices and
-recovery conduct, IT governance and outsourcing directions, along with DPDP 2023, PMLA,
-CERT-In directions and SEBI/IRDAI distribution boundaries — are **indicative and stated as at
-the time of writing.** Regulation changes. Nothing here is legal, compliance or investment
+Regulatory references were **checked against public sources in August 2026.** Each entry in the
+Trust & Controls section carries its issuing authority, date and status, because status matters:
+
+- **Binding:** RBI Digital Lending Directions 2025, KYC Master Direction and V-CIP, Fair
+  Practices Code and recovery conduct, IT Governance and Outsourcing directions, the property
+  document release circular, DPDP Act 2023, PMLA obligations, CERT-In directions, and
+  SEBI/IRDAI distribution boundaries.
+- **Recommendatory, not law:** the FREE-AI Committee Report (13 August 2025) — seven guiding
+  principles and 26 recommendations, signalling supervisory intent rather than creating
+  obligations.
+- **Draft, not yet in force:** RBI's Draft Guidance on Regulatory Principles for Model Risk
+  Management (24 June 2026), whose consultation closed 24 July 2026. Its final text may differ.
+
+Regulation changes, and drafts change more. Nothing here is legal, compliance or investment
 advice. Validate every reference against current source texts with qualified counsel before
 acting on any of it.
