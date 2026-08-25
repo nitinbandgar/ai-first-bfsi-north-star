@@ -96,8 +96,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 .sec__hd:hover{background:var(--panel-2)}
 .sec[data-open="true"] .sec__hd{background:transparent}
 .sec__n{font-family:var(--ff-mono);font-size:.68rem;color:var(--indigo-ink);background:var(--indigo-wash);border-radius:3px;padding:5px 0;text-align:center;font-weight:600}
-.sec__t{font-family:var(--ff-display);font-size:1.08rem;font-weight:700;line-height:1.25}
-.sec__d{font-size:.88rem;color:var(--ink-2);margin-top:3px;line-height:1.45}
+.sec__t{display:block;font-family:var(--ff-display);font-size:1.08rem;font-weight:700;line-height:1.25}
+.sec__d{display:block;font-size:.88rem;color:var(--ink-2);margin-top:3px;line-height:1.45}
 .sec__cv{color:var(--ink-3);transition:transform .2s;margin-top:3px}
 .sec[data-open="true"] .sec__cv{transform:rotate(180deg)}
 .sec__bd{display:none;padding:0 17px 20px;border-top:1px solid var(--rule-soft);margin-top:2px}
@@ -260,8 +260,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 .lay__c span{font-size:.73rem;padding:2px 8px;border-radius:2px;background:var(--panel-2);color:var(--ink-2);border:1px solid var(--rule-soft)}
 
 /* principles */
-.prns{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:5px;overflow:hidden}
-.prn{background:var(--panel);padding:15px 16px}
+/* separate bordered cards rather than a 1px-gap grid, so an incomplete
+   final row does not leave an empty tinted cell */
+.prns{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px}
+.prn{background:var(--panel);border:1px solid var(--rule);border-radius:5px;padding:15px 16px}
 .prn__n{font-family:var(--ff-mono);font-size:.65rem;color:var(--indigo-ink)}
 .prn__t{font-family:var(--ff-display);font-size:.98rem;font-weight:700;margin-block:5px 5px;line-height:1.25}
 .prn__d{font-size:.82rem;color:var(--ink-2);line-height:1.45}
@@ -366,6 +368,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 .leg{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;font-size:.76rem;color:var(--ink-2)}
 .leg span{display:flex;align-items:center;gap:5px}
 .leg i{width:10px;height:10px;border-radius:2px;display:block}
+
+/* Stacked label/description pairs written as <span> inside a wrapper.
+   Without this they render inline and run together on one line. */
+.gcard__n,.gcard__d,.gcard__m,.hu__r,.hu__a,.regb__t,.regb__s,.ag__n,.ag__d,.ag__more{display:block}
+.regb{display:block}
 
 .card{background:var(--panel);border:1px solid var(--rule);border-radius:5px;padding:15px 17px}
 .note{font-size:.83rem;color:var(--ink-2);line-height:1.5}
