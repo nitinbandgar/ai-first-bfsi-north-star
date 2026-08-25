@@ -20,17 +20,24 @@ discussions: *"the regulator will never allow it."*
 | **Enterprise Functions** | Finance, Treasury & Investments, Risk & Compliance, Internal Audit, HR, Technology, Cyber, Legal, Procurement, Data & AI Platform |
 | **Walkthrough** | Three step-through scenarios with a live audit ledger |
 | **Trust & Controls** | Thirteen regulatory obligations mapped to the controls and agents that satisfy them |
-| **Agent Index** | Searchable register of all 126 agents, each with an autonomy level and a named human owner |
+| **Agent Index** | Searchable register of all 127 agents, each with an autonomy level and a named human owner |
 | **Roadmap** | Three horizons with pass/fail gates, an org-shape view, and eight named failure modes |
 
-126 agents · 9 lifecycle stages · 10 enterprise functions · 53 accountable human roles · 35 guardrails
+127 agents · 9 lifecycle stages · 10 enterprise functions · 53 accountable human roles · 35 guardrails
 
-## The two ideas doing the heavy lifting
+## The three ideas doing the heavy lifting
 
 **Autonomy is a per-decision setting, not a company setting.** Five levels, from *human decides
 / AI informs* to *fully autonomous / exception-only human*. Autonomy is granted against evidence
 — evaluations, incident rates, audit findings — and revoked automatically when that evidence
 decays. This reframes "should AI do this?" into a question a board can actually adjudicate.
+
+**Autonomy is a function of risk *and* verifiability.** Risk tells you how much autonomy is
+safe; verifiability tells you how much is possible. Where a result is checked automatically by a
+test, a reconciliation or a limit breach, agents compound and errors surface in minutes. Where
+nothing can check the output, they drift silently — and a low risk score gives false comfort.
+The dangerous quadrant is *low harm, not verifiable*: it reads as the safe place to start and
+quietly degrades.
 
 **Generative models never make regulated decisions.** LLM agents gather, structure, explain,
 draft and converse. Credit, pricing, fraud classification and financial reporting run on

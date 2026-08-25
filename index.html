@@ -516,6 +516,38 @@ table.idx td.hu{font-size:.8rem}
 .princ__t{font-family:var(--ff-display); font-size:1.02rem; font-weight:600; margin-block:7px 7px; line-height:1.25}
 .princ__d{font-size:.85rem; color:var(--ink-2); line-height:1.5}
 
+/* risk x verifiability matrix */
+.mtxwrap{border:1px solid var(--rule); border-radius:4px; overflow:hidden}
+.mtx{display:grid; grid-template-columns:132px 1fr 1fr; gap:1px; background:var(--rule)}
+.mtx__corner{background:var(--panel-2)}
+.mtx__h{background:var(--panel-2); padding:12px 16px}
+.mtx__h b{display:block; font-family:var(--ff-display); font-size:.88rem; font-weight:700}
+.mtx__h span{display:block; font-size:.75rem; color:var(--ink-3); margin-top:2px; line-height:1.35}
+.mtx__lbl{
+  background:var(--panel-2); padding:14px 16px; display:flex; align-items:center;
+  font-family:var(--ff-display); font-size:.92rem; font-weight:700;
+}
+.mtx__c{background:var(--panel); padding:15px 17px}
+.mtx__k{display:none; font-family:var(--ff-mono); font-size:.62rem; color:var(--ink-3); letter-spacing:.04em; margin-bottom:6px}
+.mtx__t{font-family:var(--ff-display); font-size:1rem; font-weight:700; margin-bottom:5px}
+.mtx__d{font-size:.84rem; color:var(--ink-2); line-height:1.48}
+.mtx__a{margin-top:9px}
+.mtx__c--trap{background:var(--verm-wash)}
+.mtx__c--trap .mtx__t{color:var(--verm)}
+.mtx__c--best{background:var(--teal-wash)}
+.mtx__c--best .mtx__t{color:var(--teal)}
+@media (max-width:760px){
+  .mtx{grid-template-columns:1fr}
+  .mtx__corner,.mtx__h,.mtx__lbl{display:none}
+  .mtx__k{display:block}
+}
+.formula{
+  display:inline-flex; align-items:center; gap:9px; flex-wrap:wrap;
+  font-family:var(--ff-mono); font-size:.82rem; color:var(--ink);
+  background:var(--panel-2); border:1px solid var(--rule);
+  padding:8px 14px; border-radius:3px; margin-bottom:18px;
+}
+
 /* architecture stack */
 .stack{display:grid; gap:6px}
 .layer{
@@ -601,7 +633,7 @@ const LADDER = [
    d:'The agent does the whole task end to end, then waits. A person performs a meaningful review and releases. Maker–checker survives, minus the keystrokes.',
    ex:'Disbursement above threshold · regulatory returns · outbound campaign assets · production code changes'},
   {n:3, code:'A3', name:'AI executes, human audits a risk-weighted sample',
-   d:'Runs autonomously in the flow. Humans review a sample weighted by value, novelty, model confidence and complaint linkage — plus 100% of anything that touched a guardrail.',
+   d:'Runs autonomously in the flow. Humans review a sample weighted by value, novelty, model confidence and complaint linkage — plus 100% of anything that touched a guardrail. The sampling decision can itself be delegated: a <b>co-reviewer agent</b> scores each case and calls in a human only where the score warrants it, inside bounds a human set. That is how risk-weighted review becomes real rather than aspirational.',
    ex:'Servicing conversations · collections contact within policy · fraud triage · continuous control testing'},
   {n:4, code:'A4', name:'Fully autonomous, exception-only human',
    d:'No routine human touch. Humans appear only when a guardrail fires or an anomaly surfaces. Reserved for reversible, bounded, high-volume actions with strong deterministic checks.',
@@ -612,12 +644,13 @@ const LADDER = [
 const PRINCIPLES = [
   {t:'Agents do the work. Humans own the outcome.', d:'Accountability never transfers to a model. Every agent has a named human owner who answers for it to the board, the auditor and the regulator — by name, in a register.'},
   {t:'Autonomy is earned per decision, on evidence.', d:'Not a company-wide setting and not a vendor default. A workflow climbs the ladder when its evals, incidents and audit results earn it — and drops automatically when they decay.'},
+  {t:'Every productivity metric ships with its paired quality metric.', d:'A throughput gain is only real if quality held. Report cost per contact beside complaint rate, decision turnaround beside credit cost, output volume beside reversion rate. A productivity number presented alone is an unfalsifiable claim — and the first thing a sceptical board member will, correctly, refuse to believe.'},
   {t:'Generative models never make regulated decisions.', d:'They gather, structure, explain, draft and converse. Credit, pricing, fraud classification and financial reporting run on governed, versioned, independently validated deterministic engines.'},
   {t:'The audit trail is the product.', d:'If an action cannot be reconstructed — inputs, model version, tools called, approvals given — it does not ship. Regulator-readiness is built in, not assembled during an inspection.'},
   {t:'Controls are code, not guidance.', d:'Calling hours, affordability limits, consent scope, pricing bands. An instruction in a prompt is a suggestion; a system constraint is a control. Only one of those survives an audit.'},
   {t:'A human is always one step away.', d:'On every channel, for every customer, at every moment. Refusing or burying escalation is a reportable conduct breach, not a conversion optimisation.'},
   {t:'Design for exit from day one.', d:'Kill switches, rollback to last known-good configuration, graceful degradation to human operation, and no model or cloud dependency you have not tested unwinding.'},
-  {t:'Redeploy before you reduce.', d:'The people who supervised processes become the people who supervise agents, handle exceptions and own relationships. Publish that path early and mean it, or lose the people who make the transition work.'}
+  {t:'Turn doers into directors.', d:'The aim is that people feel promoted, not automated — moved from executing steps to setting direction, judging trade-offs and owning outcomes. Be honest about who that is easy for: it suits people who already think in outcomes, and asks a great deal of a large processing floor. Publish the path early, fund the reskilling properly, and redeploy before you reduce.'}
 ];
 
 /* ---------- ARCHITECTURE ---------- */
@@ -1006,6 +1039,7 @@ const FUNCS = [
 {
  id:'data', ic:'data', t:'Data & AI Platform', s:'The function that makes every other function possible',
  agents:[
+  {n:'Semantic Layer Agent', a:3, d:'Maintains the meaning layer over the warehouse: <b>which table is the source of truth, how entities relate, and what each metric actually means.</b> The most commonly skipped prerequisite in the entire programme, and the one that decides whether agents are useful or confidently wrong.'},
   {n:'Data Product Agent', a:3, d:'Maintains governed, documented, owned data products instead of the pipelines nobody owns and everybody depends on.'},
   {n:'Data Quality Agent', a:3, d:'Profiling, contract enforcement and — the part that matters — fixing causes upstream rather than symptoms downstream.'},
   {n:'Consent & Purpose Agent', a:4, d:'The single arbiter of whether a given agent may use a given data element for a given purpose. One place to ask, one place to audit.'},
@@ -1016,7 +1050,7 @@ const FUNCS = [
  humans:[
   {r:'Chief Data & AI Officer', a:'Owns the estate, the standards and the autonomy doctrine.'},
   {r:'AI Council', a:'A standing cross-functional body — Risk, Compliance, Legal, Technology, Business — that approves every autonomy change.'}],
- note:'Nothing reaches production without a passing evaluation, a named owner, a registered autonomy level and a tested rollback. Evaluations are versioned and adversarial, and explicitly include prompt injection, jailbreak and data-exfiltration suites.'
+ note:'Nothing reaches production without a passing evaluation, a named owner, a registered autonomy level and a tested rollback. Evaluations are versioned and adversarial, and explicitly include prompt injection, jailbreak and data-exfiltration suites. <b>And none of it works without a semantic layer.</b> An agent that does not know which table is the source of truth, or how the tables relate, will answer confidently and wrongly — and sound exactly as convincing as when it is right. In a lender carrying merged loan books and more than one core system, that is not a data-engineering detail to be sequenced later. It is the prerequisite that gates every agent in this document.'
 }];
 
 /* ---------- WALKTHROUGH SCENARIOS ---------- */
@@ -1350,6 +1384,49 @@ $('#v-north').innerHTML = `
       </div>
     </div>`).join('')}
   </div>
+
+  <div class="shead" style="margin-top:44px">
+    <span class="eyebrow">The second axis</span>
+    <h2>Risk tells you how much autonomy is safe. Verifiability tells you how much is possible.</h2>
+    <p>The ladder tiers autonomy by what happens when an agent is wrong. That is only half the question. The other half is whether you can <em>tell</em> that it was wrong — automatically, at scale, without a person reading every output. Where a result is checked by a test, a reconciliation, a limit breach or a downstream signal, agents compound and errors surface in minutes. Where nothing checks it, they drift silently, and a low risk score gives you false comfort.</p>
+  </div>
+  <div class="formula"><span>autonomy</span><span style="color:var(--ink-3)">=</span><span>ƒ( risk<span style="color:var(--ink-3)">,</span> verifiability )</span></div>
+  <div class="mtxwrap">
+    <div class="mtx">
+      <div class="mtx__corner"></div>
+      <div class="mtx__h"><b>Verifiable</b><span>A test, reconciliation or limit can check the output automatically</span></div>
+      <div class="mtx__h"><b>Not verifiable</b><span>Only a person can tell whether the output was any good</span></div>
+
+      <div class="mtx__lbl">Low harm</div>
+      <div class="mtx__c mtx__c--best">
+        <div class="mtx__k">LOW HARM · VERIFIABLE</div>
+        <div class="mtx__t">Automate hard</div>
+        <div class="mtx__d">The highest return available to the company, and where to spend Horizon 1. Reconciliation breaks, control testing, test generation, alert triage, document classification, statement and NOC issuance. Build the loop, let it run, and let the check catch what goes wrong.</div>
+        <div class="mtx__a">${alChip(3)} ${alChip(4)}</div>
+      </div>
+      <div class="mtx__c mtx__c--trap">
+        <div class="mtx__k">LOW HARM · NOT VERIFIABLE</div>
+        <div class="mtx__t">The trap</div>
+        <div class="mtx__d">Reads as the safe place to start, and quietly degrades. Nothing catches the drift because nothing can check the output — tone in customer communications, summary quality, segment rationale, meeting notes. Either build the verification first, or keep a standing human sample. Do not let a low risk score talk you out of both.</div>
+        <div class="mtx__a">${alChip(1)} ${alChip(2)}</div>
+      </div>
+
+      <div class="mtx__lbl">High harm</div>
+      <div class="mtx__c">
+        <div class="mtx__k">HIGH HARM · VERIFIABLE</div>
+        <div class="mtx__t">Automate behind a gate</div>
+        <div class="mtx__d">The co-reviewer pattern. An agent does the whole task and scores its own risk, calling in a human only where the score warrants it — inside bounds a human set. Disbursement control, regulatory returns, production changes, credit file review.</div>
+        <div class="mtx__a">${alChip(2)} ${alChip(3)}</div>
+      </div>
+      <div class="mtx__c">
+        <div class="mtx__k">HIGH HARM · NOT VERIFIABLE</div>
+        <div class="mtx__t">Keep the human</div>
+        <div class="mtx__d">Suitability judgments, hardship assessments, fraud classification, adverse employment decisions, legal positions. Agents assemble the file and draft the reasoning; a named person decides and answers for it. Automating here is not ambition — it is unpriced exposure.</div>
+        <div class="mtx__a">${alChip(0)} ${alChip(1)}</div>
+      </div>
+    </div>
+  </div>
+  <p class="prose" style="font-size:.9rem;margin-top:14px">Two practical consequences. First, when a workflow stalls below the autonomy you wanted, the fix is usually to <strong>build the missing check</strong>, not to accept the ceiling — verifiability is something you engineer, not something you inherit. Second, the fastest way to find your Horizon 1 backlog is to list every process where the answer is already checked by something downstream, and start there.</p>
 
   <div class="shead" style="margin-top:44px">
     <span class="eyebrow">Architecture</span>
